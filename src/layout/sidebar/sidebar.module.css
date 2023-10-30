@@ -2,3 +2,8 @@
   border-color: rgb(124, 255, 80);
   flex-grow: 1;
 }
+
+.sidebar ul {
+  display: grid;
+  grid-gap: 1rem;
+}
