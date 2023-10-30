@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./header.module.css";
 
-export const Header = ({ title }) => {
-  return <header className={`${classes.header} component`}>{title}</header>;
+export const Header = ({ children }) => {
+  return <header className={`${classes.header} component`}>{children}</header>;
 };

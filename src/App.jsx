@@ -8,12 +8,12 @@ import "./assets/index.css";
 export const App = () => {
   return (
     <div className="wrapper">
-      <Header title={"header"} />
+      <Header>Header</Header>
       <div className="content-wrapper">
-        <Sidebar title={"side bar"} />
-        <Content title={"content"} />
+        <Sidebar>Sidebar</Sidebar>
+        <Content>Content</Content>
       </div>
-      <Footer title={"footer"} />
+      <Footer>Footer</Footer>
     </div>
   );
 };
