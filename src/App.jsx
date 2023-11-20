@@ -5,6 +5,8 @@ import { Sidebar } from "./layout/sidebar/Sidebar";
 import { Content } from "./components/content/Content";
 import { Menu } from "./components/menu/Menu";
 import "./assets/index.css";
+import { Logo } from "./components/logo/Logo";
+import { DateTime } from "./components/dateTime/DateTime";
 
 export const App = () => {
   const menuList = [
@@ -17,7 +19,12 @@ export const App = () => {
 
   return (
     <div className="wrapper">
-      <Header>Header</Header>
+      <Header>
+        <>
+          <Logo img={"./logo.png"} />
+          <DateTime />
+        </>
+      </Header>
       <div className="content-wrapper">
         <Sidebar>{menu}</Sidebar>
         <Content>Content</Content>
