@@ -17,8 +17,8 @@ export const FactsList = () => {
   return (
     <div className={classes.container}>
       <ul className={classes.list}>
-        {facts.map((fact) => (
-          <FactsListItem>{fact}</FactsListItem>
+        {facts.map((fact, index) => (
+          <FactsListItem key={index}>{fact}</FactsListItem>
         ))}
       </ul>
       <button
