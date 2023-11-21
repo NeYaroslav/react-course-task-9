@@ -1,0 +1,10 @@
+.item {
+  counter-increment: list;
+  padding: 0;
+}
+.item::before {
+  content: "-";
+  font-weight: 900;
+  margin-right: 0.25rem;
+  color: rgb(57, 218, 32);
+}
