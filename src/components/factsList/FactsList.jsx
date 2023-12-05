@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { getFacts } from "../../services/factsApi";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FactsListItem } from "../factsListItem/FactsListItem";
-import classes from "./factsList.module.css";
+import { factsSelector } from "../../redux/selectors";
+import { updateFetchedFacts } from "../../redux/thunks";
 import { getId } from "../../utils/helpers";
+import classes from "./factsList.module.css";
 
 export const FactsList = () => {
-  const [facts, setFacts] = useState([]);
+  const facts = useSelector(factsSelector);
+  const dispatch = useDispatch();
 
-  const updateFacts = () => {
-    getFacts().then(({ data: facts }) => setFacts(facts));
-  };
+  const updateFacts = useCallback(() => dispatch(updateFetchedFacts()), [dispatch]);
 
   useEffect(() => {
     updateFacts();
-  }, []);
+  }, [updateFacts]);
 
   return (
     <div className={classes.container}>

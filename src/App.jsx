@@ -22,7 +22,7 @@ export const App = () => {
     <div className="wrapper">
       <Header>
         <>
-          <Logo img={"./logo.png"} />
+          <Logo />
           <DateTime />
         </>
       </Header>

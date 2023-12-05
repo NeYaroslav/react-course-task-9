@@ -1,3 +1,11 @@
-export const getFacts = (n = 10) => {
-  return fetch(`https://meowfacts.herokuapp.com/?count=${n}`).then((facts) => facts.json());
+/**
+ *
+ * @param {{ numberOfFacts: number, signal: AbortSignal }}
+ * @returns
+ */
+
+export const getFacts = ({ numberOfFacts, signal }) => {
+  return fetch(`https://meowfacts.herokuapp.com/?count=${numberOfFacts ?? 10}`, { signal }).then((facts) =>
+    facts.json()
+  );
 };
