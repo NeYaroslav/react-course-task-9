@@ -3,14 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { CurrentDate } from "../currentDate/CurrentDate";
 import { CurrentTime } from "../currentTime/CurrentTime";
 import { dateSelector } from "../../redux/selectors";
-import { updateDateConstatntly } from "../../redux/thunks";
+import { updateDate } from "../../redux/actions";
 import classes from "./dateTime.module.css";
 
 export const DateTime = () => {
   const dateObj = useSelector(dateSelector);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(updateDateConstatntly()), [dispatch]);
+  useEffect(() => {
+    const intervalLabel = setInterval(() => {
+      dispatch(updateDate(new Date()));
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalLabel);
+    };
+  }, [dispatch]);
 
   return (
     <div className={classes.wrapper}>

@@ -10,7 +10,11 @@ export const FactsList = () => {
   const facts = useSelector(factsSelector);
   const dispatch = useDispatch();
 
-  const updateFacts = useCallback(() => dispatch(updateFetchedFacts()), [dispatch]);
+  const updateFacts = useCallback(() => {
+    const abortController = new AbortController();
+    dispatch(updateFetchedFacts(10, abortController.signal));
+    return abortController.abort;
+  }, [dispatch]);
 
   useEffect(() => {
     updateFacts();
