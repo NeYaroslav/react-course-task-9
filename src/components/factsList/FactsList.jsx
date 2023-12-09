@@ -1,24 +1,13 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { FactsListItem } from "../factsListItem/FactsListItem";
 import { factsSelector } from "../../redux/selectors";
 import { updateFetchedFacts } from "../../redux/thunks";
 import { getId } from "../../utils/helpers";
 import classes from "./factsList.module.css";
 
-export const FactsList = () => {
-  const facts = useSelector(factsSelector);
-  const dispatch = useDispatch();
-
-  const updateFacts = useCallback(() => {
-    const abortController = new AbortController();
-    dispatch(updateFetchedFacts(10, abortController.signal));
-    return abortController.abort;
-  }, [dispatch]);
-
-  useEffect(() => {
-    updateFacts();
-  }, [updateFacts]);
+export const FactsList = ({ facts, updateFacts }) => {
+  useEffect(updateFacts, [updateFacts]);
 
   return (
     <div className={classes.container}>
@@ -35,3 +24,15 @@ export const FactsList = () => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  facts: factsSelector(state),
+});
+const mapDispatchToProps = (dispatch) => ({
+  updateFacts: () => {
+    const abortController = new AbortController();
+    dispatch(updateFetchedFacts(10, abortController.signal));
+    return () => abortController.abort();
+  },
+});
+export const ConnectedFactsList = connect(mapStateToProps, mapDispatchToProps)(FactsList);

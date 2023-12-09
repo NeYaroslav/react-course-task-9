@@ -1,11 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { logoSelector } from "../../redux/selectors";
 import classes from "./logo.module.css";
 
-export const Logo = () => {
-  const logoPath = useSelector(logoSelector);
-
+export const Logo = ({ logoPath }) => {
   return (
     <a
       href="/"
@@ -17,3 +15,8 @@ export const Logo = () => {
     </a>
   );
 };
+
+const mapStateToProps = (state) => ({
+  logoPath: logoSelector(state),
+});
+export const ConnectedLogo = connect(mapStateToProps)(Logo);
